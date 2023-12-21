@@ -17,7 +17,7 @@ import * as Repack from '@callstack/repack';
  * @param env Environment options passed from either Webpack CLI or React Native CLI
  *            when running with `react-native start/bundle`.
  */
-export default (env) => {
+export default env => {
   const {
     mode = 'development',
     context = Repack.getDirname(import.meta.url),
@@ -37,7 +37,7 @@ export default (env) => {
     throw new Error('Missing platform');
   }
 
-    /**
+  /**
    * Using Module Federation might require disabling hmr.
    * Uncomment below to set `devServer.hmr` to `false`.
    *
@@ -110,7 +110,7 @@ export default (env) => {
       path: path.join(dirname, 'build/generated', platform),
       filename: 'index.bundle',
       chunkFilename: '[name].chunk.bundle',
-      publicPath: Repack.getPublicPath({ platform, devServer }),
+      publicPath: Repack.getPublicPath({platform, devServer}),
     },
     /**
      * Configures optimization of the built bundle.
@@ -230,6 +230,66 @@ export default (env) => {
           bundleFilename,
           sourceMapFilename,
           assetsPath,
+        },
+      }),
+
+      new Repack.plugins.ModuleFederationPlugin({
+        /**
+         * The name of the module is used to identify the module in URLs resolver and imports.
+         */
+        name: 'gumtracker',
+        /**
+         * This is a list of modules that will be shared between remote containers.
+         */
+        exposes: {
+          './App': './App.tsx',
+        },
+        /**
+         * Shared modules are shared in the share scope.
+         * React, React Native and React Navigation should be provided here because there should be only one instance of these modules.
+         * Their names are used to match requested modules in this compilation.
+         */
+        shared: {
+          react: {
+            singleton: true,
+            eager: STANDALONE,
+            requiredVersion: '^18.2.0',
+          },
+          'react-native': {
+            singleton: true,
+            eager: STANDALONE,
+            requiredVersion: '^0.73.1',
+          },
+          '@react-navigation/native': {
+            singleton: true,
+            eager: STANDALONE,
+            requiredVersion: '^6.1.9',
+          },
+          '@react-navigation/native-stack': {
+            singleton: true,
+            eager: STANDALONE,
+            requiredVersion: '^6.9.17',
+          },
+          'react-native-safe-area-context': {
+            singleton: true,
+            eager: STANDALONE,
+            requiredVersion: '^4.8.1',
+          },
+          'react-native-screens': {
+            singleton: true,
+            eager: STANDALONE,
+            requiredVersion: '3.20.0',
+          },
+          '@react-native-async-storage/async-storage': {
+            singleton: true,
+            eager: STANDALONE,
+            requiredVersion: '^1.21.0',
+          },
+          'react-native-reanimated': {
+            singleton: true,
+            eager: STANDALONE,
+            requiredVersion: '^3.6.1',
+          },
         },
       }),
     ],
