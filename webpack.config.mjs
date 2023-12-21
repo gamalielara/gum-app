@@ -237,7 +237,7 @@ export default env => {
         /**
          * The name of the module is used to identify the module in URLs resolver and imports.
          */
-        name: 'gumtracker',
+        name: 'gumapp_host',
         /**
          * This is a list of modules that will be shared between remote containers.
          */
@@ -252,42 +252,42 @@ export default env => {
         shared: {
           react: {
             singleton: true,
-            eager: STANDALONE,
+            eager: true,
             requiredVersion: '^18.2.0',
           },
           'react-native': {
             singleton: true,
-            eager: STANDALONE,
+            eager: true,
             requiredVersion: '^0.73.1',
           },
           '@react-navigation/native': {
             singleton: true,
-            eager: STANDALONE,
+            eager: true,
             requiredVersion: '^6.1.9',
           },
           '@react-navigation/native-stack': {
             singleton: true,
-            eager: STANDALONE,
+            eager: true,
             requiredVersion: '^6.9.17',
           },
           'react-native-safe-area-context': {
             singleton: true,
-            eager: STANDALONE,
+            eager: true,
             requiredVersion: '^4.8.1',
           },
           'react-native-screens': {
             singleton: true,
-            eager: STANDALONE,
+            eager: true,
             requiredVersion: '3.20.0',
           },
           '@react-native-async-storage/async-storage': {
             singleton: true,
-            eager: STANDALONE,
+            eager: true,
             requiredVersion: '^1.21.0',
           },
           'react-native-reanimated': {
             singleton: true,
-            eager: STANDALONE,
+            eager: true,
             requiredVersion: '^3.6.1',
           },
         },
