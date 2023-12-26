@@ -1,0 +1,4 @@
+[submodule "@gumtracker"]
+	path = src/features/@gumtracker
+	url = https://github.com/gamalielara/gumtracker.git
+	branch = bare-rn
